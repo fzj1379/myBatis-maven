@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.UserInfoMapper1">
+    <select id="findUserInfoById" parameterType="int" resultType="UserInfo">
+        select * from user_info where id = #{id}
+    </select>
+    <select id="queryUserInfoById" parameterType="int" resultType="UserInfo">
+        select * from user_info where id = #{id}
+    </select>
+    <select id="findUserInfoByUserName" parameterType="String" resultType="UserInfo">
+        select * from user_info where userName like CONCAT(CONCAT('%',#{userName}),'%');
+    </select>
+    <select id="findUserInfoByUserName2" parameterType="String" resultType="UserInfo">
+        select * from user_info where userName like CONCAT(CONCAT('%',#{userName}),'%');
+    </select>
+    <insert id="addUserInfo" parameterType="UserInfo">
+        insert into user_info(userName,password) values (#{userName},#{password})
+    </insert>
+    <insert id="addUserInfo2" parameterType="UserInfo" keyProperty="id">
+        insert into user_info(userName,password,realName,sex,address,email,regDate,states) values (#{userName},#{password},#{realName},#{sex},#{address},#{email},#{regDate},#{states})
+    </insert>
+    <update id="updateUserInfo" parameterType="UserInfo">
+        update user_info set userName=#{userName},password=#{password} where id=#{id}
+    </update>
+    <delete id="deleteUserInfo" parameterType="int">
+        delete from user_info where id = #{id}
+    </delete>
+    <delete id="deleteUserInfoByObj" parameterType="UserInfo">
+        delete from user_info where id = #{id}
+    </delete>
+</mapper>

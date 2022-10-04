@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.BookMapper">
+    <select id="findBookByISBN" parameterType="int" resultType="Book">
+        select * from book where isbn = #{isbn}
+    </select>
+    <select id="findBookByName" parameterType="String" resultType="Book">
+        select * from book where Name like CONCAT(CONCAT('%',#{Name}),'%');
+    </select>
+
+    <select id="searchBookByStr" parameterType="String" resultType="Book">
+        select * from book
+        where Name like CONCAT('%',#{name},'%')
+        or kind like CONCAT('%',#{kind},'%');
+    </select>
+
+    <insert id="addBookInfo" parameterType="Book">
+        insert into book(name,kind) values (#{name},#{kind})
+    </insert>
+    <update id="updateBookInfo" parameterType="Book">
+        update book set name=#{name},kind=#{kind} where isbn=#{isbn}
+    </update>
+    <delete id="deleteBookInfo" parameterType="int">
+        delete from book where isbn = #{isbn}
+    </delete>
+</mapper>
